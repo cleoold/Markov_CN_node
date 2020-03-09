@@ -1,0 +1,39 @@
+{
+  "name": "markov_cn_serve",
+  "version": "1.0.0",
+  "description": "server app to build random word sentences using one's conversation history",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "lint": "eslint src/*",
+    "start": "tsc && node out/startserver.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cleoold/Markov_CN_node"
+  },
+  "keywords": [
+    "markov",
+    "chinese",
+    "random"
+  ],
+  "author": "cos",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/async-lock": "^1.1.1",
+    "@types/koa": "^2.11.2",
+    "@types/koa-router": "^7.4.0",
+    "@types/node": "^13.9.0",
+    "@typescript-eslint/eslint-plugin": "^2.22.0",
+    "@typescript-eslint/parser": "^2.22.0",
+    "eslint": "^6.8.0",
+    "typescript": "^3.8.3"
+  },
+  "dependencies": {
+    "async-lock": "^1.2.2",
+    "koa": "^2.11.0",
+    "koa-body": "^4.1.1",
+    "koa-router": "^8.0.8",
+    "nodejieba": "^2.4.0"
+  }
+}

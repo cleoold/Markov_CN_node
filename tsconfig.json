@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "lib": [ "ES2015", "ES2016", "ES2017", "ES2018", "ESNext" ],
+        "strict": true,
+        "outDir": "out"
+    },
+    "exclude": [
+        "node_modules",
+        "typings/main",
+        "typings/main.d.ts",
+        "js/error.ts"
+    ]
+}

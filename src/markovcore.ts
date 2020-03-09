@@ -8,7 +8,7 @@ const scanAllWords = (sentence: string): string[] => {
 
 /** implementation of markov text generator */
 export class MarkovImpl {
-    static NOWORD = '\n'; /** indicates a sentence ends */
+    static get NOWORD() { return '\n'; } /** indicates a sentence ends */
 
     statetab: { /** dictionary of word chain */
         [k: string]: string[]

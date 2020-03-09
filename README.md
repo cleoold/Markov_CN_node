@@ -2,7 +2,7 @@
 
 ### Markov-Chinese
 
-Generates random text based on the input sentences.
+Generates random text based on the input sentences. Simple, one process, no database.
 
 ### Intro
 
@@ -57,4 +57,8 @@ Yes, that's all.
 
 ### Thanks to
 Thanks to [nodejieba](https://github.com/yanyiwu/nodejieba) for providing such a wonderful word cut library.
+
+### TODO list
+* Complete API readme docs.
+* Improve English sentences (probably necessary).
 

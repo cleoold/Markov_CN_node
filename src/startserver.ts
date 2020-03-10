@@ -24,8 +24,11 @@ const models = (() => {
     return res;
 })();
 
-/**                                      has invalid chars       only whitespace */
-const idIsInvalid = (id: string) => /[/\\?%*:|"<>]/g.test(id) || /^\s*$/.test(id);
+/**                                   has invalid chars       only whitespace */
+const idIsValid = (id: any) =>
+    typeof id === 'string' && !(/[/\\?%*:|"<>]/g.test(id) || /^\s*$/.test(id));
+const messageIsValid = (m: any) =>
+    typeof m === 'string' || (m?.every?.((e: any) => typeof e === 'string') && m?.length);
 
 route.get('sentence', '/sentence', async ctx => {
     const id = ctx.query['id'];
@@ -48,7 +51,7 @@ route.post('newsentence', '/sentence', koaBody(), async ctx => {
         return;
     }
     const { id, message } = ctx.request.body;
-    if (id === undefined || idIsInvalid(id) || message === undefined) {
+    if (!(idIsValid(id) && messageIsValid(message))) {
         ctx.status = 400;
         return;
     }

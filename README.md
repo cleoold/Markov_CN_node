@@ -14,7 +14,7 @@ It can be served as a minimalist backend of a Markov chat bot just by using the 
 
 ### Usage
 
-Type `npm run start` to run the app. By default it runs on `127.0.0.1:6758`, however this can be changed in config.ts.
+Type `npm run start` in the *project root folder* to run the app. By default it runs on `127.0.0.1:6758`, however this can be changed in config.ts.
 
 The app manages multiple models. Let us assume that the name is `erika`.
 
@@ -27,16 +27,18 @@ Host: 127.0.0.1:6758
 Content-Type: application/json
 
 {"id":"erika","message":"你好，我是马尔可夫机器人"}
+// OR
+{"id":"erika","message":["你好，我是马尔可夫机器人", "哈喽", "楼上是群龙王"]}
 ```
-The posted json must be a json format:
+The posted json must be in a json format:
 * field `id`: the name of the model, it cannot contain any of `/\?%*:|"<>`. 
-* field `message`: the message passed to the model.
+* field `message`: the message passed to the model. This field can be an array of strings, indicating that all of the content will be added.
 
 If everything works, a folder `models/erika` will be created which contains the history. `conversation` records all the messages sent, while the `json` files contain the actual Markov model. Also a status code `200` is returned. Otherwise codes `400` or `500` are returned, and information is logged to the console.
 
 #### Generate sentence
 
-After repeating the above steps sufficiently, one can send a GET request to the endpoint `/sentence` to retrieve a sentence:
+After repeating the above steps many times, one can send a GET request to the endpoint `/sentence` to retrieve a sentence:
 ```
 GET /sentence?id=erika&wc=20 HTTP/1.1
 Host: 127.0.0.1:6758
@@ -48,7 +50,7 @@ If the model does not exist, a status code of `404` is returned, otherwise the r
 ```
 {
     "status": 200,
-    "message": "你好，我是马尔可夫机车"
+    "message": "楼上是马尔可夫机器人"
 }
 ```
 plus a status code of `200`.

@@ -17,12 +17,14 @@ export class MessageHistory extends BaseSession {
         return `${datestr} ${msg}\n`;
     }
 
-    /** stores a new message into the history */
-    public async addEntry(msg: string, date?: Date): Promise<void> {
-        msg = msg.replace('\n', '');
+    /** stores a new message/new messages into the history */
+    public async addEntry(msg: string | string[], date?: Date): Promise<void> {
+        const dated = date ?? new Date;
+        const ss = (typeof msg === 'string' ? [ msg ] : msg)
+            .map(m => this.constructEntry(m.replace('\n', ''), dated));
         try {
             await ensureFolder(this.me.workingDir);
-            await fs.appendFile(this.writefile, this.constructEntry(msg, date ?? new Date));
+            await fs.appendFile(this.writefile, ss.join(''));
         } catch (err) {
             logerrx(`error in MessageHistory:addEntry: ${err.message}`);
         }

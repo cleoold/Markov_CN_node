@@ -44,7 +44,7 @@ export const ensureFile = async (fn: string, initcontent: string) => {
     try {
         handle = await fs.open(fn, 'r');
     } catch (err) {
-        if (err.code.includes('ENOENT') || err.message.includes('ENOENT'))
+        if (err.code.includes('ENOENT'))
             await fs.writeFile(fn, initcontent);
         else throw err;
     } finally {

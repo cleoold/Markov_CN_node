@@ -22,7 +22,7 @@ This tool is also useful if you provide your own conversation.txt`)
     const baks = [];
     for (let dir of dirs) {
         const files = fs.readdirSync(dir).map(f => `${dir}/${f}`).filter(f => /\.json$/.test(f));
-        for (file of files) {
+        for (let file of files) {
             const bakfile = `${file}.bak`;
             fs.copyFileSync(file, bakfile);
             baks.push(bakfile);

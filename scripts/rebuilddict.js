@@ -22,6 +22,7 @@ This tool is also useful if you provide your own conversation.txt`)
     const baks = [];
     for (let dir of dirs) {
         const files = fs.readdirSync(dir).map(f => `${dir}/${f}`).filter(f => /\.json$/.test(f));
+        console.log(`Backing up ${dir}...`);
         for (let file of files) {
             const bakfile = `${file}.bak`;
             fs.copyFileSync(file, bakfile);
@@ -30,6 +31,7 @@ This tool is also useful if you provide your own conversation.txt`)
         }
     }
     for (let profile of profiles) {
+        console.log(`Rebuilding ${profile}...`);
         const mkov = new MarkovSession(profile);
         const hist = new MessageHistory(profile);
         await mkov.updateTable(
@@ -37,7 +39,7 @@ This tool is also useful if you provide your own conversation.txt`)
             // if date does not exist, use message directly
         );
     }
-    confirm = await question('delete backups? Y/N ');
+    confirm = await question('Rebuild was successful. delete backups? Y/N ');
     if (!yes(confirm)) process.exit();
     for (let bak of baks) {
         fs.unlinkSync(bak);

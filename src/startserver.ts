@@ -14,10 +14,13 @@ const lock = new AsyncLock();
 
 const models = (() => {
     const res = {} as { [k: string]: boolean | undefined };
-    for (let n of fs.readdirSync(conf.MODELPATH)
-        .filter(e => fs.statSync(`${conf.MODELPATH}/${e}`).isDirectory())
-    )
-        res[n] = true;
+    try {
+        for (let n of fs.readdirSync(conf.MODELPATH)
+            .filter(e => fs.statSync(`${conf.MODELPATH}/${e}`).isDirectory())
+        ) res[n] = true;
+    } catch (err) { 
+        if (!err.code.includes('ENOENT')) throw err;
+    }
     return res;
 })();
 

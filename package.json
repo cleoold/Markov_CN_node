@@ -6,7 +6,8 @@
   "scripts": {
     "build": "tsc",
     "lint": "eslint src/*",
-    "start": "tsc && node out/startserver.js"
+    "start": "tsc && node out/startserver.js",
+    "dict": "node scripts/rebuilddict.js"
   },
   "repository": {
     "type": "git",

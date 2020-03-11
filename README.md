@@ -34,7 +34,7 @@ The posted json must be in a json format:
 * field `id`: the name of the model, it cannot contain any of `/\?%*:|"<>`. 
 * field `message`: the message passed to the model. This field can be an array of strings, indicating that all of the content will be added.
 
-If everything works, a folder `models/erika` will be created which contains the history. `conversation` records all the messages sent, while the `json` files contain the actual Markov model. Also a status code `200` is returned. Otherwise codes `400` or `500` are returned, and information is logged to the console.
+If everything works, a folder `models/erika` will be created which contains the history. `conversation.txt` records all the messages sent, while the `json` files contain the actual Markov model. Also a status code `200` is returned. Otherwise codes `400` or `500` are returned, and information is logged to the console.
 
 #### Generate sentence
 
@@ -56,6 +56,16 @@ If the model does not exist, a status code of `404` is returned, otherwise the r
 plus a status code of `200`.
 
 Yes, that's all.
+
+#### Scripts
+
+* `npm run start`
+
+Starts server at 127.0.0.1:6758.
+
+* `npm run dict`
+
+This command will regenerate all the dictionaries based on `conversations.txt`. It is good to run this script every time after a breaking update.
 
 ### Thanks to
 Thanks to [nodejieba](https://github.com/yanyiwu/nodejieba) for providing such a wonderful word cut library.

@@ -50,7 +50,7 @@ export class MarkovSession extends BaseSession {
     constructor(myname: string) {
         super(myname);
         this.headdictfile = `${this.me.workingDir}/head.json`;
-        this.nonheaddictfile = `${this.me.workingDir}/chunk.json`;
+        this.nonheaddictfile = `${this.me.workingDir}/chunk1.json`;
     }
 
     /** ensures necessary files exist. if they don't, create defaults. */

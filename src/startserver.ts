@@ -1,12 +1,11 @@
 import * as fs from 'fs';
 import * as Koa from 'koa';
 import * as KoaRouter from 'koa-router';
-import * as KoaBody from 'koa-body'; void KoaBody;
+import * as KoaBody from 'koa-body';
 import * as AsyncLock from 'async-lock';
 import { MarkovSession, MessageHistory }  from './sessions';
 import * as conf from './config';
 import { logerrx, logx } from './util';
-import koaBody = require('koa-body');
 
 const app = new Koa();
 const route = new KoaRouter();
@@ -45,7 +44,7 @@ route.get('sentence', '/sentence', async ctx => {
     };
 });
 
-route.post('newsentence', '/sentence', koaBody(), async ctx => {
+route.post('newsentence', '/sentence', KoaBody(), async ctx => {
     if (ctx.request.header['content-type'] !== 'application/json') {
         ctx.status = 400;
         return;

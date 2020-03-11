@@ -13,7 +13,7 @@ const question = q => new Promise(res => rl.question(q, answer => res(answer)));
 const yes = confirm => confirm === 'Y' || confirm === 'y' || confirm === 'yes';
 
 const main = async () => {
-    console.log(`This script will rebuild the Markov profile based on existing chat histories (the conversations.txt). The corresponding json files will be rewrote.
+    console.log(`This script will rebuild the Markov profile based on existing chat histories (the conversations.txt). The corresponding json files will be rewritten.
 This tool is also useful if you provide your own conversation.txt`)
     const dirs = fs.readdirSync(conf.MODELPATH).map(e => `${conf.MODELPATH}/${e}`).filter(e => fs.statSync(e).isDirectory());
     const profiles = dirs.map(e => e.slice(conf.MODELPATH.length + 1));

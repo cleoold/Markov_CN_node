@@ -6,6 +6,39 @@ const scanAllWords = (sentence: string): string[] => {
         .filter((w: any) => w !== ' ');
 };
 
+const englishw = /^[a-zA-Z0-9]+$/;
+const englishpunc = /^[:;,.]$/;
+
+/** joins strings of *CN & EN* words with appropriate whitespace eg.  
+ *   
+ * * [ "haha", "呵呵", "啊啊", "喵嗷嗷", "hello", "嗷", "hello", "world",
+ * "the", "night", "了", "yoyo", "such" ]  
+ * =>  
+ * "haha 呵呵啊啊喵嗷嗷 hello 嗷 hello world the night 了 yoyo such"  
+ *   
+ * * [ "bye", ",", "my", "curel", "world", ",", "goobye", ",", "really", "-", "awesome", "." ]  
+ * =>  
+ * "bye, my curel world, goobye, really - awesome."
+ * 
+ * drawback: "quoted english word" is not handled
+ */
+const concatenate = (lst: string[]): string => {
+    const cpy = lst.slice(),
+        englisht = cpy.map(e => englishw.test(e)); // t => test
+    englisht[englisht.length] = true;
+    if (englisht[0] && !englisht[1] && !englishpunc.test(cpy[1]))
+        cpy[0] += ' ';
+    for (let i = 1; i < cpy.length; i++) {
+        let currt = englisht[i],
+            nextt = englisht[i+1];
+        if (currt)
+            cpy[i] = ' ' + cpy[i];
+        if (currt && !nextt && !englishpunc.test(cpy[i+1]))
+            cpy[i] += ' ';
+    }
+    return cpy.join('');
+};
+
 /** implementation of markov text generator */
 export class MarkovImpl {
     static get NOWORD() { return '\n'; } /** indicates a sentence ends */
@@ -45,6 +78,6 @@ export class MarkovImpl {
             sb.push(nextword);
             w1 = nextword;
         }
-        return sb.join('');
+        return concatenate(sb);
     }
 }

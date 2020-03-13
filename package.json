@@ -1,6 +1,6 @@
 {
   "name": "markov_cn_serve",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "server app to build random word sentences using one's conversation history",
   "main": "index.js",
   "scripts": {
